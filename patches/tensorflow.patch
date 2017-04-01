@@ -8,7 +8,7 @@ index b2da109..8ee1f3a 100644
  static int TryToReadNumaNode(const string &pci_bus_id, int device_ordinal) {
 -#if defined(__APPLE__)
 +#ifdef __aarch64__
-+    // There is no numa_node on Jetson ARM64
++    LOG(INFO) << "ARM64 does not support NUMA - returning NUMA node zero";
 +    return 0;
 +#elif defined(__APPLE__)
    LOG(INFO) << "OS X does not support NUMA - returning NUMA node zero";
