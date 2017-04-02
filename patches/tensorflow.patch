@@ -1,7 +1,66 @@
-diff --git tensorflow/stream_executor/cuda/cuda_gpu_executor.cc tensorflow/stream_executor/cuda/cuda_gpu_executor.cc
+diff --git a/tensorflow/core/kernels/BUILD b/tensorflow/core/kernels/BUILD
+index 2e04827..9d81923 100644
+--- a/tensorflow/core/kernels/BUILD
++++ b/tensorflow/core/kernels/BUILD
+@@ -1184,7 +1184,7 @@ tf_kernel_libraries(
+         "segment_reduction_ops",
+         "scan_ops",
+         "sequence_ops",
+-        "sparse_matmul_op",
++        #DC "sparse_matmul_op",
+     ],
+     deps = [
+         ":bounds_check",
+diff --git a/tensorflow/core/kernels/cwise_op_gpu_select.cu.cc b/tensorflow/core/kernels/cwise_op_gpu_select.cu.cc
+index 02058a8..880a0c3 100644
+--- a/tensorflow/core/kernels/cwise_op_gpu_select.cu.cc
++++ b/tensorflow/core/kernels/cwise_op_gpu_select.cu.cc
+@@ -43,8 +43,14 @@ struct BatchSelectFunctor<GPUDevice, T> {
+     const int all_but_batch = then_flat_outer_dims.dimension(1);
+
+ #if !defined(EIGEN_HAS_INDEX_LIST)
+-    Eigen::array<int, 2> broadcast_dims{{ 1, all_but_batch }};
+-    Eigen::Tensor<int, 2>::Dimensions reshape_dims{{ batch, 1 }};
++    // Eigen::array<int, 2> broadcast_dims{{ 1, all_but_batch }};
++    Eigen::array<int, 2> broadcast_dims;
++   broadcast_dims[0] = 1;
++    broadcast_dims[1] = all_but_batch;
++    // Eigen::Tensor<int, 2>::Dimensions reshape_dims{{ batch, 1 }};
++    Eigen::Tensor<int, 2>::Dimensions reshape_dims;
++   reshape_dims[0] = batch;
++   reshape_dims[1] = 1;
+ #else
+     Eigen::IndexList<Eigen::type2index<1>, int> broadcast_dims;
+     broadcast_dims.set(1, all_but_batch);
+diff --git a/tensorflow/core/kernels/sparse_tensor_dense_matmul_op_gpu.cu.cc b/tensorflow/core/kernels/sparse_tensor_dense_matmul_op_gpu.cu.cc
+index a177696..28d2f59 100644
+--- a/tensorflow/core/kernels/sparse_tensor_dense_matmul_op_gpu.cu.cc
++++ b/tensorflow/core/kernels/sparse_tensor_dense_matmul_op_gpu.cu.cc
+@@ -104,9 +104,17 @@ struct SparseTensorDenseMatMulFunctor<GPUDevice, T, ADJ_A, ADJ_B> {
+     int n = (ADJ_B) ? b.dimension(0) : b.dimension(1);
+
+ #if !defined(EIGEN_HAS_INDEX_LIST)
+-    Eigen::Tensor<int, 2>::Dimensions matrix_1_by_nnz{{ 1, nnz }};
+-    Eigen::array<int, 2> n_by_1{{ n, 1 }};
+-    Eigen::array<int, 1> reduce_on_rows{{ 0 }};
++    // Eigen::Tensor<int, 2>::Dimensions matrix_1_by_nnz{{ 1, nnz }};
++    Eigen::Tensor<int, 2>::Dimensions matrix_1_by_nnz;
++   matrix_1_by_nnz[0] = 1;
++   matrix_1_by_nnz[1] = nnz;
++    // Eigen::array<int, 2> n_by_1{{ n, 1 }};
++    Eigen::array<int, 2> n_by_1;
++   n_by_1[0] = n;
++   n_by_1[1] = 1;
++    // Eigen::array<int, 1> reduce_on_rows{{ 0 }};
++    Eigen::array<int, 1> reduce_on_rows;
++   reduce_on_rows[0]= 0;
+ #else
+     Eigen::IndexList<Eigen::type2index<1>, int> matrix_1_by_nnz;
+     matrix_1_by_nnz.set(1, nnz);
+diff --git a/tensorflow/stream_executor/cuda/cuda_gpu_executor.cc b/tensorflow/stream_executor/cuda/cuda_gpu_executor.cc
 index b2da109..8ee1f3a 100644
---- tensorflow/stream_executor/cuda/cuda_gpu_executor.cc
-+++ tensorflow/stream_executor/cuda/cuda_gpu_executor.cc
+--- a/tensorflow/stream_executor/cuda/cuda_gpu_executor.cc
++++ b/tensorflow/stream_executor/cuda/cuda_gpu_executor.cc
 @@ -870,7 +870,10 @@ CudaContext* CUDAExecutor::cuda_context() { return context_; }
  // For anything more complicated/prod-focused than this, you'll likely want to
  // turn to gsys' topology modeling.
