@@ -6,7 +6,7 @@
 #
 INSTALL_DIR=$PWD
 cd $HOME
-wget https://github.com/bazelbuild/bazel/releases/download/0.4.5/bazel-0.4.5-dist.zip
+wget --no-check-certificate https://github.com/bazelbuild/bazel/releases/download/0.4.5/bazel-0.4.5-dist.zip
 unzip bazel-0.4.5-dist.zip -d bazel-0.4.5-dist
 sudo chmod -R ug+rwx $HOME/bazel-0.4.5-dist
 # git clone https://github.com/bazelbuild/bazel.git
