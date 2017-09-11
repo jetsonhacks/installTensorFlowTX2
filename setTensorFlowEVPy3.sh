@@ -10,7 +10,7 @@ sudo mkdir /usr/lib/aarch64-linux-gnu/include/
 sudo cp /usr/include/cudnn.h /usr/lib/aarch64-linux-gnu/include/cudnn.h
 # Setup the environment variables for configuration
 # PYTHON Path is the default
-default_python_bin_path=$(which python)
+default_python_bin_path=$(which python3)
 PYTHON_BIN_PATH=$default_python_bin_path
 # No Google Cloud Platform support
 TF_NEED_GCP=0

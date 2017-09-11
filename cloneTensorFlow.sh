@@ -1,5 +1,5 @@
 #!/bin/bash
-# NVIDIA Jetson TX1
+# NVIDIA Jetson TX2
 # TensorFlow Installation
 # Install Tensorflow repository then
 # setup for compilation
@@ -8,7 +8,7 @@ INSTALL_DIR=$PWD
 cd $HOME
 git clone https://github.com/tensorflow/tensorflow.git
 cd tensorflow
-git checkout v1.0.1
+git checkout v1.3.0
 patch -p1 < $INSTALL_DIR/patches/tensorflow.patch
 
 
