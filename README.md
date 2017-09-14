@@ -1,5 +1,5 @@
 # installTensorFlowTX2
-September 11, 2017
+September 13, 2017
 JetsonHacks
 
 Install TensorFlow v1.3 on NVIDIA Jetson TX2 Development Kit
@@ -74,6 +74,11 @@ This TensorFlow installation procedure was derived from these discussion threads
 </ul>
 
 ### Release Notes
+September 13, 2017
+* L4T 28.1 (JetPack 3.1)
+* TensorFlow 1.3
+* Github changed some sha256 checksums, patches added to workspace.bzl as workaround
+
 September 2017
 * L4T 28.1 (JetPack 3.1)
 * TensorFlow 1.3

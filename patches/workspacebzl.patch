@@ -1,0 +1,47 @@
+diff --git a/tensorflow/workspace.bzl b/tensorflow/workspace.bzl
+index 42840a2..d6c8086 100644
+--- a/tensorflow/workspace.bzl
++++ b/tensorflow/workspace.bzl
+@@ -147,11 +147,11 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
+   native.new_http_archive(
+       name = "eigen_archive",
+       urls = [
+-          "http://mirror.bazel.build/bitbucket.org/eigen/eigen/get/f3a22f35b044.tar.gz",
+-          "https://bitbucket.org/eigen/eigen/get/f3a22f35b044.tar.gz",
++          "http://mirror.bazel.build/bitbucket.org/eigen/eigen/get/d781c1de9834.tar.gz",
++          "https://bitbucket.org/eigen/eigen/get/d781c1de9834.tar.gz",
+       ],
+-      sha256 = "ca7beac153d4059c02c8fc59816c82d54ea47fe58365e8aded4082ded0b820c4",
+-      strip_prefix = "eigen-eigen-f3a22f35b044",
++      sha256 = "a34b208da6ec18fa8da963369e166e4a368612c14d956dd2f9d7072904675d9b",
++      strip_prefix = "eigen-eigen-d781c1de9834",
+       build_file = str(Label("//third_party:eigen.BUILD")),
+   )
+ 
+@@ -330,7 +330,7 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
+           "https://github.com/google/protobuf/archive/0b059a3d8a8f8aa40dde7bea55edca4ec5dfea66.tar.gz",
+           "http://mirror.bazel.build/github.com/google/protobuf/archive/0b059a3d8a8f8aa40dde7bea55edca4ec5dfea66.tar.gz",
+       ],
+-      sha256 = "6d43b9d223ce09e5d4ce8b0060cb8a7513577a35a64c7e3dad10f0703bf3ad93",
++      # sha256 = "6d43b9d223ce09e5d4ce8b0060cb8a7513577a35a64c7e3dad10f0703bf3ad93",
+       strip_prefix = "protobuf-0b059a3d8a8f8aa40dde7bea55edca4ec5dfea66",
+       # TODO: remove patching when tensorflow stops linking same protos into
+       #       multiple shared libraries loaded in runtime by python.
+@@ -348,7 +348,7 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
+           "https://github.com/google/protobuf/archive/0b059a3d8a8f8aa40dde7bea55edca4ec5dfea66.tar.gz",
+           "http://mirror.bazel.build/github.com/google/protobuf/archive/0b059a3d8a8f8aa40dde7bea55edca4ec5dfea66.tar.gz",
+       ],
+-      sha256 = "6d43b9d223ce09e5d4ce8b0060cb8a7513577a35a64c7e3dad10f0703bf3ad93",
++      # sha256 = "6d43b9d223ce09e5d4ce8b0060cb8a7513577a35a64c7e3dad10f0703bf3ad93",
+       strip_prefix = "protobuf-0b059a3d8a8f8aa40dde7bea55edca4ec5dfea66",
+   )
+ 
+@@ -358,7 +358,7 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
+           "https://github.com/google/protobuf/archive/0b059a3d8a8f8aa40dde7bea55edca4ec5dfea66.tar.gz",
+           "http://mirror.bazel.build/github.com/google/protobuf/archive/0b059a3d8a8f8aa40dde7bea55edca4ec5dfea66.tar.gz",
+       ],
+-      sha256 = "6d43b9d223ce09e5d4ce8b0060cb8a7513577a35a64c7e3dad10f0703bf3ad93",
++      # sha256 = "6d43b9d223ce09e5d4ce8b0060cb8a7513577a35a64c7e3dad10f0703bf3ad93",
+       strip_prefix = "protobuf-0b059a3d8a8f8aa40dde7bea55edca4ec5dfea66",
+   )
+ 
