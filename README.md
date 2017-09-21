@@ -9,7 +9,12 @@ Jetson TX2 is flashed with JetPack 3.1 which installs:
 * CUDA 8.0
 * cuDNN 6.0
 
-### Installation
+### Pre-built installation
+
+If you are only interested in installing Tensorflow on the TX2, not building from source, pre-built wheel files are available here: https://github.com/jetsonhacks/installTensorFlowJetsonTX
+
+If you are interested in building from source, read on.
+### Preparation
 Before installing TensorFlow, a swap file should be created (minimum of 8GB recommended). The Jetson TX2 does not have enough physical memory to compile TensorFlow. The swap file may be located on the internal eMMC, and may be removed after the build.
 
 There is a convenience script for building a swap file. To build a 8GB swapfile on the eMMC in the home directory:
